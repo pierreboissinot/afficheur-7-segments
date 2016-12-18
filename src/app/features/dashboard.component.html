@@ -1,8 +1,53 @@
-<header>
-  <h3> Welcome to the Dashboard {{form.get('name').value}}!</h3>
-</header>
 <section>
   <form [formGroup]="form" autocomplete="off">
-    <input formControlName="name">
+    <label for="chiffre"></label>
+    <input formControlName="chiffre" name="chiffre" type="number" min="0" max="9">
+      <button [disabled]="!form.valid" (click)="afficher(form.get('chiffre').value)">Valider</button>
   </form>
+</section>
+
+<section *ngIf="form.valid">
+  <h4>Représentation binaire</h4>
+  <pre [textContent]="representationBinaire"></pre>
+</section>
+
+<section *ngIf="form.valid">
+  <h4>Résultat afficheur</h4>
+  <table id="afficheur">
+    <tr>
+      <td></td>
+      <td colspan="2" [ngClass]="{'allume': segmentA, 'eteint': segmentA == false}"></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td rowspan="2" [ngClass]="{'allume': segmentF, 'eteint': segmentF == false}"></td>
+      <td></td>
+      <td></td>
+      <td rowspan="2" [ngClass]="{'allume': segmentB, 'eteint': segmentB == false}"></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td colspan="2" [ngClass]="{'allume': segmentG, 'eteint': segmentG == false}"></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td rowspan="2" [ngClass]="{'allume': segmentE, 'eteint': segmentE == false}"></td>
+      <td></td>
+      <td></td>
+      <td rowspan="2" [ngClass]="{'allume': segmentC, 'eteint': segmentC == false}"></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td colspan="2" [ngClass]="{'allume': segmentD, 'eteint': segmentD == false}"></td>
+      <td></td>
+    </tr>
+  </table>
 </section>
